@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Header';
+import Employees from './Employees';
+import Footer from './Footer';
+import GroupedTeamMembers from './GroupTeamMembers';
+import Nav from './Nav';
+import NotFound from './NotFound';
+import {  useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { DataProvider } from './context/DataContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataProvider>
+      <Router>
+        <Nav />
+        <Header />
+        <Routes>
+          <Route path='/' element={<Employees />}>
+          </Route>
+          <Route path='/GroupedTeamMembers' element={<GroupedTeamMembers />}>
+          </Route>
+          <Route path='*' element={<NotFound />}>
+          </Route>
+        </Routes>
+        <Footer />
+      </Router>
+    </DataProvider>
   );
 }
 
